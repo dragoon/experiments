@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interactive Experiments</title>
+  <meta name="description" content="A growing collection of small browser-native interaction, audio, and visual experiments.">
+  <link rel="stylesheet" href="shared/gallery.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <p class="eyebrow">Browser-native lab</p>
+      <h1>Interactive Experiments</h1>
+      <p class="intro">Small playable sketches in plain HTML, CSS, canvas, and JavaScript.</p>
+    </header>
+
+    <section class="grid" id="experiment-grid" aria-label="Experiments">
+      <a class="experiment-card" href="experiments/guitar-strings/" style="--accent: #45d6c5">
+        <span class="card-art" aria-hidden="true">
+          <span class="string string-a"></span>
+          <span class="string string-b"></span>
+          <span class="string string-c"></span>
+          <span class="pulse"></span>
+        </span>
+        <span class="card-copy">
+          <strong>Guitar Strings</strong>
+          <span>A full-screen playable guitar-string toy with animated ripples, reactive background light, chords, and original riffs.</span>
+        </span>
+        <span class="tags">audio / canvas / music</span>
+      </a>
+    </section>
+  </main>
+
+  <script src="shared/gallery.js" defer></script>
+</body>
+</html>

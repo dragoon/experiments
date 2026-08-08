@@ -1,0 +1,14 @@
+{
+  "title": "Interactive Experiments",
+  "description": "A growing collection of small browser-native interaction, audio, and visual experiments.",
+  "experiments": [
+    {
+      "title": "Guitar Strings",
+      "slug": "guitar-strings",
+      "path": "experiments/guitar-strings/",
+      "description": "A full-screen playable guitar-string toy with animated ripples, reactive background light, chords, and original riffs.",
+      "tags": ["audio", "canvas", "music"],
+      "accent": "#45d6c5"
+    }
+  ]
+}
