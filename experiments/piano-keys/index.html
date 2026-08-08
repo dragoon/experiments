@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Playable Piano Keys</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f8f2e6;
+      --muted: #b8c2c8;
+      --panel: rgba(10, 12, 18, 0.78);
+      --panel-strong: rgba(4, 6, 10, 0.9);
+      --line: rgba(255, 255, 255, 0.16);
+      --amber: #f3c15f;
+      --jade: #52ddbd;
+      --rose: #f07a96;
+      --blue: #7eb7ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(180deg, #07090f 0%, #111019 48%, #050609 100%);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.026) 0 1px, transparent 1px 10vw),
+        radial-gradient(ellipse at 50% 74%, rgba(243, 193, 95, 0.1), transparent 31%),
+        radial-gradient(ellipse at 34% 18%, rgba(82, 221, 189, 0.08), transparent 28%),
+        radial-gradient(ellipse at 72% 22%, rgba(240, 122, 150, 0.08), transparent 24%),
+        radial-gradient(ellipse at 50% 50%, transparent 0 48%, rgba(0, 0, 0, 0.64) 94%);
+      opacity: 0.9;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      cursor: pointer;
+    }
+
+    .topbar {
+      position: fixed;
+      top: max(14px, env(safe-area-inset-top));
+      left: 50%;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 142px max-content minmax(0, 1fr) 126px;
+      align-items: center;
+      gap: 10px;
+      width: min(1120px, calc(100vw - 28px));
+      min-height: 58px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 20px 74px rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(18px) saturate(1.18);
+      transform: translateX(-50%);
+    }
+
+    .brand {
+      min-width: 0;
+      padding: 2px 4px 2px 2px;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 0.94rem;
+      line-height: 1.05;
+    }
+
+    .brand span,
+    .status {
+      color: var(--muted);
+      font-size: 0.74rem;
+      line-height: 1.25;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+      min-height: 36px;
+    }
+
+    .controls.chords {
+      justify-content: center;
+    }
+
+    .controls.songs {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      overflow: visible;
+    }
+
+    button {
+      appearance: none;
+      flex: 0 0 auto;
+      min-width: 42px;
+      height: 36px;
+      padding: 0 13px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 750;
+      letter-spacing: 0;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+    }
+
+    button:hover {
+      border-color: rgba(82, 221, 189, 0.62);
+      background: rgba(82, 221, 189, 0.14);
+      transform: translateY(-1px);
+    }
+
+    button:focus-visible {
+      outline: 2px solid var(--jade);
+      outline-offset: 2px;
+    }
+
+    button[aria-pressed="true"] {
+      border-color: rgba(243, 193, 95, 0.8);
+      background: rgba(243, 193, 95, 0.23);
+      color: #fff7df;
+    }
+
+    .stop {
+      color: #ffe1e8;
+    }
+
+    .status {
+      flex: 0 1 170px;
+      min-width: 116px;
+      text-align: right;
+    }
+
+    .flash {
+      position: fixed;
+      left: 50%;
+      bottom: max(24px, calc(env(safe-area-inset-bottom) + 24px));
+      z-index: 3;
+      padding: 8px 12px;
+      border: 1px solid rgba(126, 183, 255, 0.34);
+      border-radius: 8px;
+      background: rgba(5, 9, 16, 0.8);
+      color: #e2f0ff;
+      font-size: 0.8rem;
+      opacity: 0;
+      transform: translate(-50%, 10px);
+      transition: opacity 180ms ease, transform 180ms ease;
+      pointer-events: none;
+    }
+
+    .flash.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        grid-template-columns: 1fr auto;
+        align-items: stretch;
+        gap: 8px;
+        padding: 9px;
+      }
+
+      .brand {
+        grid-column: 1;
+      }
+
+      .controls {
+        gap: 6px;
+      }
+
+      .controls.chords,
+      .controls.songs {
+        grid-column: 1 / -1;
+      }
+
+      .controls.chords {
+        flex-wrap: wrap;
+      }
+
+      button {
+        min-width: 40px;
+        height: 34px;
+        padding: 0 11px;
+        font-size: 0.78rem;
+      }
+
+      .status {
+        grid-column: 2;
+        text-align: left;
+      }
+    }
+
+    @media (max-height: 520px) {
+      .topbar {
+        top: max(8px, env(safe-area-inset-top));
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="piano" aria-label="Interactive animated piano keyboard"></canvas>
+
+  <section class="topbar" aria-label="Piano controls">
+    <div class="brand">
+      <strong>Piano Keys</strong>
+      <span>Two-octave nocturne.</span>
+    </div>
+    <div class="controls chords" aria-label="Chords">
+      <button type="button" data-chord="C" aria-pressed="true">C</button>
+      <button type="button" data-chord="G" aria-pressed="false">G</button>
+      <button type="button" data-chord="Am" aria-pressed="false">Am</button>
+      <button type="button" data-chord="F" aria-pressed="false">F</button>
+      <button type="button" data-chord="Dm" aria-pressed="false">Dm</button>
+      <button type="button" data-chord="Em" aria-pressed="false">Em</button>
+    </div>
+    <div class="controls songs" aria-label="Demo songs">
+      <button type="button" data-song="ode">Ode</button>
+      <button type="button" data-song="twinkle">Twinkle</button>
+      <button type="button" data-song="greensleeves">Greensleeves</button>
+      <button type="button" data-song="canon">Canon</button>
+      <button type="button" data-song="furElise">Fur Elise</button>
+      <button type="button" data-song="minuet">Minuet</button>
+      <button class="stop" type="button" data-stop>Stop</button>
+    </div>
+    <div class="status" id="status" aria-live="polite">Selected: C</div>
+  </section>
+
+  <div class="flash" id="flash">Audio ready</div>
+
+  <script src="js/config.js" defer></script>
+  <script src="js/audio.js" defer></script>
+  <script src="js/renderer.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
