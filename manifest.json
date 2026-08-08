@@ -8,7 +8,26 @@
       "path": "experiments/guitar-strings/",
       "description": "A full-screen playable guitar-string toy with animated ripples, reactive background light, chords, and original riffs.",
       "tags": ["audio", "canvas", "music"],
-      "accent": "#45d6c5"
+      "accent": "#45d6c5",
+      "art": "strings"
+    },
+    {
+      "title": "Piano Keys",
+      "slug": "piano-keys",
+      "path": "experiments/piano-keys/",
+      "description": "A full-screen playable piano with animated keys, glowing note ripples, chords, and public-domain demo songs.",
+      "tags": ["audio", "canvas", "music"],
+      "accent": "#f3c15f",
+      "art": "piano"
+    },
+    {
+      "title": "Lego Tetris Wall",
+      "slug": "lego-tetris",
+      "path": "experiments/lego-tetris/",
+      "description": "A falling brick-piece wall builder where rows never disappear and each facade becomes a building.",
+      "tags": ["game", "canvas", "building"],
+      "accent": "#ff725c",
+      "art": "bricks"
     }
   ]
 }

@@ -8,16 +8,56 @@
     return Array.isArray(tags) ? tags.join(" / ") : "";
   }
 
+  function artMarkup(experiment) {
+    if (experiment.art === "piano") {
+      return `
+        <span class="card-art piano-art" aria-hidden="true">
+          <span class="mini-piano">
+            <span class="piano-white"></span>
+            <span class="piano-white"></span>
+            <span class="piano-white"></span>
+            <span class="piano-white"></span>
+            <span class="piano-white"></span>
+            <span class="piano-white"></span>
+            <span class="piano-white"></span>
+            <span class="piano-black black-a"></span>
+            <span class="piano-black black-b"></span>
+            <span class="piano-black black-c"></span>
+            <span class="piano-black black-d"></span>
+            <span class="piano-black black-e"></span>
+          </span>
+          <span class="key-glow"></span>
+        </span>
+      `;
+    }
+
+    if (experiment.art === "bricks") {
+      return `
+        <span class="card-art bricks-art" aria-hidden="true">
+          <span class="mini-wall">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </span>
+        </span>
+      `;
+    }
+
+    return `
+      <span class="card-art strings-art" aria-hidden="true">
+        <span class="string string-a"></span>
+        <span class="string string-b"></span>
+        <span class="string string-c"></span>
+        <span class="pulse"></span>
+      </span>
+    `;
+  }
+
   function cardMarkup(experiment) {
     const accent = experiment.accent || "#45d6c5";
     return `
       <a class="experiment-card" href="${experiment.path}" style="--accent: ${accent}">
-        <span class="card-art" aria-hidden="true">
-          <span class="string string-a"></span>
-          <span class="string string-b"></span>
-          <span class="string string-c"></span>
-          <span class="pulse"></span>
-        </span>
+        ${artMarkup(experiment)}
         <span class="card-copy">
           <strong>${experiment.title}</strong>
           <span>${experiment.description}</span>
