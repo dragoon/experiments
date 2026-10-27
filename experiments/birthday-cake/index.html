@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf5eb">
+  <meta name="description" content="Make a little birthday magic. Build your own animated cake, add the finishing touches, and make a wish.">
+  <title>Birthday Cake Studio · Interactive Experiments</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="masthead">
+      <a class="back-link" href="../../" aria-label="Back to all experiments"><span aria-hidden="true">←</span> All experiments</a>
+      <span class="wordmark"><span class="brand-flower" aria-hidden="true">✳</span> THE BIRTHDAY CAKE STUDIO</span>
+      <button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false"><span aria-hidden="true">Ⅱ</span> Pause motion</button>
+    </header>
+
+    <main class="studio">
+      <section class="preview" aria-label="Your birthday cake">
+        <div class="intro">
+          <p class="eyebrow">A RECIPE FOR A GOOD DAY</p>
+          <h1>A little joy,<br>made by <em>you.</em></h1>
+          <p>Dream it. Decorate it. Make a wish.</p>
+        </div>
+        <div id="cake-stage" class="cake-stage">
+          <svg id="cake-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 680" role="img" aria-labelledby="cake-title cake-description">
+            <title id="cake-title">Your birthday cake</title>
+            <desc id="cake-description">A strawberry-pink birthday cake with two tiers and five lit candles.</desc>
+          </svg>
+        </div>
+        <div class="celebration-controls">
+          <button id="wish-button" class="wish-button" type="button"><span aria-hidden="true">✧</span> Make a wish</button>
+          <p id="wish-hint">Close your eyes. Think of something lovely.</p>
+        </div>
+        <p id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+      </section>
+
+      <aside class="recipe" aria-labelledby="recipe-title">
+        <div class="recipe-heading"><div><p class="eyebrow">THE FUN PART</p><h2 id="recipe-title">Make it yours</h2></div><span class="recipe-star" aria-hidden="true">✳</span></div>
+        <form id="cake-controls">
+          <fieldset>
+            <legend><span class="step">01</span> Stack it up</legend>
+            <div class="segments tier-options">
+              <label><input type="radio" name="tiers" value="1"><span>One tier</span></label>
+              <label><input type="radio" name="tiers" value="2" checked><span>Two tiers</span></label>
+              <label><input type="radio" name="tiers" value="3"><span>Three tiers</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span class="step">02</span> Pick your palette <span id="palette-name" class="field-detail">Strawberry</span></legend>
+            <div id="palette-options" class="palette-options"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span class="step">03</span> The icing on the cake</legend>
+            <div class="segments">
+              <label><input type="radio" name="icing" value="smooth"><span>Smooth</span></label>
+              <label><input type="radio" name="icing" value="drip"><span>Drip</span></label>
+              <label><input type="radio" name="icing" value="piped" checked><span>Piped</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span class="step">04</span> A little extra</legend>
+            <div class="topping-options">
+              <label><input type="radio" name="topping" value="sprinkles" checked><span><svg viewBox="0 0 36 30" aria-hidden="true"><g stroke-width="3.5" stroke-linecap="round"><path d="m9 6 3 5m10-5-2 5m7 6 3 3" stroke="#c96c7e"/><path d="m7 22 4-3m6 5 1-5m9-12 3-2" stroke="#b89848"/></g></svg>Sprinkles</span></label>
+              <label><input type="radio" name="topping" value="berries"><span><svg viewBox="0 0 36 30" aria-hidden="true"><path d="M9 10Q18 4 27 10Q28 20 18 27Q8 20 9 10" fill="#cb6a73"/><path d="m18 12-8-5 7 1 2-6 2 6 7-1Z" fill="#738b68"/><path d="m14 14 1 2m7-2-1 2m-3 3 1 2" stroke="#ffdfac" stroke-width="1.8"/></svg>Berries</span></label>
+              <label><input type="radio" name="topping" value="flowers"><span><svg viewBox="0 0 36 30" aria-hidden="true"><g fill="#c9b6cf"><ellipse cx="18" cy="8" rx="5" ry="6"/><ellipse cx="25" cy="13" rx="6" ry="5"/><ellipse cx="22" cy="22" rx="5" ry="6"/><ellipse cx="13" cy="22" rx="5" ry="6"/><ellipse cx="11" cy="13" rx="6" ry="5"/></g><circle cx="18" cy="15" r="4" fill="#e9b953"/></svg>Flowers</span></label>
+              <label><input type="radio" name="topping" value="none"><span><svg viewBox="0 0 36 30" aria-hidden="true"><circle cx="18" cy="15" r="10" fill="none" stroke="#b8ae9e" stroke-width="1.5"/><path d="m11 22 14-14" stroke="#b8ae9e" stroke-width="1.5"/></svg>Just icing</span></label>
+            </div>
+          </fieldset>
+
+          <div class="candle-field">
+            <label for="candles"><span class="step">05</span> Candles <output id="candle-count" for="candles">5</output></label>
+            <input id="candles" name="candles" type="range" min="1" max="12" value="5">
+            <div class="range-ends" aria-hidden="true"><span>A little glow</span><span>A big wish</span></div>
+          </div>
+
+          <div class="message-field">
+            <label for="message"><span class="step">06</span> Say something sweet <span class="field-detail"><span id="message-count">15</span>/40</span></label>
+            <input id="message" name="message" type="text" value="Happy Birthday!" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Your birthday message">
+          </div>
+          <button id="surprise-button" class="surprise-button" type="button"><span aria-hidden="true">⤨</span> Surprise me <span class="button-arrow" aria-hidden="true">↗</span></button>
+          <p class="recipe-note">A fresh little creation, every time.</p>
+        </form>
+      </aside>
+    </main>
+    <footer><span>Made of pixels. Full of good wishes.</span><span>NO OCCASION TOO SMALL <span aria-hidden="true">✳</span></span></footer>
+    <noscript><p class="noscript">Please enable JavaScript to decorate your cake.</p></noscript>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

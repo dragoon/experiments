@@ -3,6 +3,24 @@
   "description": "A growing collection of small browser-native interaction, audio, and visual experiments.",
   "experiments": [
     {
+      "title": "Birthday Cake Studio",
+      "slug": "birthday-cake",
+      "path": "experiments/birthday-cake/",
+      "description": "Dream up a pastel birthday cake, add the finishing touches, and blow out the candles with a little wish.",
+      "tags": ["svg", "generator", "celebration"],
+      "accent": "#e6a1ab",
+      "art": "cake"
+    },
+    {
+      "title": "Lighthouse Simulator",
+      "slug": "lighthouse-simulator",
+      "path": "experiments/lighthouse-simulator/?v=23",
+      "description": "A twilight lighthouse simulator with swappable towers, Fresnel beams, ocean haze, rocks, and cinematic camera drift.",
+      "tags": ["three.js", "simulation", "light"],
+      "accent": "#f6c66a",
+      "art": "lighthouse"
+    },
+    {
       "title": "Guitar Strings",
       "slug": "guitar-strings",
       "path": "experiments/guitar-strings/",

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lighthouse Simulator</title>
+  <meta name="description" content="A twilight lighthouse simulator with procedural towers, Fresnel beams, fog, rocks, and ocean shimmer.">
+  <link rel="stylesheet" href="css/styles.css?v=23">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <main class="sim-shell">
+    <canvas id="lighthouse-scene" aria-label="Twilight lighthouse simulator"></canvas>
+
+    <section class="toolbar" aria-label="Lighthouse controls">
+      <div class="brand">
+        <strong>Lighthouse Simulator</strong>
+        <span id="scene-status" aria-live="polite">Twilight coast</span>
+      </div>
+
+      <label class="field">
+        <span>Body</span>
+        <select id="body-preset" aria-label="Lighthouse body">
+          <option value="stone-round">Stone round</option>
+          <option value="white-red-band" selected>White red band</option>
+          <option value="concrete-modern">Concrete modern</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Light</span>
+        <select id="light-preset" aria-label="Light rig">
+          <option value="warm-fresnel">Warm Fresnel</option>
+          <option value="cool-haze">Cool haze</option>
+          <option value="double-sweep">Double sweep</option>
+        </select>
+      </label>
+
+      <label class="range-field">
+        <span>Speed</span>
+        <input id="beam-speed" type="range" min="0.25" max="2.2" step="0.05" value="1">
+      </label>
+
+      <label class="range-field">
+        <span>Fog</span>
+        <input id="fog-amount" type="range" min="0" max="1" step="0.02" value="0.54">
+      </label>
+
+      <div class="segmented" role="group" aria-label="Camera mode">
+        <button type="button" data-camera-mode="drift" aria-pressed="true">Drift</button>
+        <button type="button" data-camera-mode="orbit" aria-pressed="false">Orbit</button>
+        <button type="button" data-camera-mode="fixed" aria-pressed="false">Fixed</button>
+      </div>
+
+      <button class="pause" id="pause-toggle" type="button" aria-pressed="false">Pause</button>
+    </section>
+
+    <div class="fallback" id="webgl-fallback" hidden>
+      <strong>WebGL is unavailable</strong>
+      <span>This experiment needs a browser with modern WebGL support.</span>
+    </div>
+  </main>
+
+  <script type="module" src="js/main.js?v=23"></script>
+</body>
+</html>

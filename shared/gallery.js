@@ -9,6 +9,17 @@
   }
 
   function artMarkup(experiment) {
+    if (experiment.art === "cake") {
+      return `
+        <span class="card-art cake-art" aria-hidden="true">
+          <span class="mini-cake-stand"></span>
+          <span class="mini-cake-bottom"></span>
+          <span class="mini-cake-top"></span>
+          <span class="mini-cake-candles"><i></i><i></i><i></i></span>
+        </span>
+      `;
+    }
+
     if (experiment.art === "piano") {
       return `
         <span class="card-art piano-art" aria-hidden="true">
@@ -43,6 +54,21 @@
       `;
     }
 
+    if (experiment.art === "lighthouse") {
+      return `
+        <span class="card-art lighthouse-art" aria-hidden="true">
+          <span class="mini-beam"></span>
+          <span class="mini-lighthouse">
+            <span class="mini-roof"></span>
+            <span class="mini-lantern"></span>
+            <span class="mini-tower"></span>
+            <span class="mini-band"></span>
+          </span>
+          <span class="mini-rocks"></span>
+        </span>
+      `;
+    }
+
     return `
       <span class="card-art strings-art" aria-hidden="true">
         <span class="string string-a"></span>
@@ -67,7 +93,7 @@
     `;
   }
 
-  fetch("manifest.json")
+  fetch("manifest.json?v=24")
     .then((response) => {
       if (!response.ok) throw new Error("Manifest unavailable");
       return response.json();

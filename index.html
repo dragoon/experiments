@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Interactive Experiments</title>
   <meta name="description" content="A growing collection of small browser-native interaction, audio, and visual experiments.">
-  <link rel="stylesheet" href="shared/gallery.css">
+  <link rel="stylesheet" href="shared/gallery.css?v=24">
 </head>
 <body>
   <main class="shell">
@@ -16,6 +16,36 @@
     </header>
 
     <section class="grid" id="experiment-grid" aria-label="Experiments">
+      <a class="experiment-card" href="experiments/birthday-cake/" style="--accent: #e6a1ab">
+        <span class="card-art cake-art" aria-hidden="true">
+          <span class="mini-cake-stand"></span>
+          <span class="mini-cake-bottom"></span>
+          <span class="mini-cake-top"></span>
+          <span class="mini-cake-candles"><i></i><i></i><i></i></span>
+        </span>
+        <span class="card-copy">
+          <strong>Birthday Cake Studio</strong>
+          <span>Dream up a pastel birthday cake, add the finishing touches, and blow out the candles with a little wish.</span>
+        </span>
+        <span class="tags">svg / generator / celebration</span>
+      </a>
+      <a class="experiment-card" href="experiments/lighthouse-simulator/?v=23" style="--accent: #f6c66a">
+        <span class="card-art lighthouse-art" aria-hidden="true">
+          <span class="mini-beam"></span>
+          <span class="mini-lighthouse">
+            <span class="mini-roof"></span>
+            <span class="mini-lantern"></span>
+            <span class="mini-tower"></span>
+            <span class="mini-band"></span>
+          </span>
+          <span class="mini-rocks"></span>
+        </span>
+        <span class="card-copy">
+          <strong>Lighthouse Simulator</strong>
+          <span>A twilight lighthouse simulator with swappable towers, Fresnel beams, ocean haze, rocks, and cinematic camera drift.</span>
+        </span>
+        <span class="tags">three.js / simulation / light</span>
+      </a>
       <a class="experiment-card" href="experiments/guitar-strings/" style="--accent: #45d6c5">
         <span class="card-art strings-art" aria-hidden="true">
           <span class="string string-a"></span>
@@ -70,6 +100,6 @@
     </section>
   </main>
 
-  <script src="shared/gallery.js" defer></script>
+  <script src="shared/gallery.js?v=24" defer></script>
 </body>
 </html>
